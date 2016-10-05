@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import mg.laiso.controller.EtudiantController;
 import mg.laiso.controller.EtudiantFormDialogController;
 import mg.laiso.controller.RootController;
@@ -34,12 +35,12 @@ public class MainApp extends Application {
     private ObservableList<Etudiant> etudiants = FXCollections.observableArrayList();
 
     public MainApp() {
-        etudiants.add(new Etudiant("H001", "Razafindradimy", "Solomampionona Dieudonné", "Tanambao", 44000.00));
+        /*etudiants.add(new Etudiant("H001", "Razafindradimy", "Solomampionona Dieudonné", "Tanambao", 44000.00));
         etudiants.add(new Etudiant("H002", "Ambinintsoa", "Fanantenana", "Soatsihadino", 44000.00));
         etudiants.add(new Etudiant("H003", "Randrianarisaona", "Mahery Haja", "Ivory Atsimo", 44000.00));
         etudiants.add(new Etudiant("H004", "Rapatsalahy", "Miary Andrianjaka", "Antarandolo", 44000.00));
         etudiants.add(new Etudiant("H005", "Randriatahirison", "Valisoa", "Ivory", 44000.00));
-        etudiants.add(new Etudiant("H006", "Rakotonirainy", "Lalamampionona Joelisolo", "Tanambao", 44000.00));
+        etudiants.add(new Etudiant("H006", "Rakotonirainy", "Lalamampionona Joelisolo", "Tanambao", 44000.00));*/
     }
 
     @Override

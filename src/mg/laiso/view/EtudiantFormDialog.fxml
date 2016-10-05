@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="199.0" prefWidth="400.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mg.laiso.controller.EtudiantFormDialogController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="199.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mg.laiso.controller.EtudiantFormDialogController">
    <children>
       <VBox layoutX="10.0" layoutY="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -32,7 +32,7 @@
                   <Label text="Prénom" GridPane.rowIndex="2" />
                   <Label text="Adresse" GridPane.rowIndex="3" />
                   <Label text="Bourse" GridPane.rowIndex="4" />
-                  <TextField fx:id="txtNumero" styleClass="text-field" stylesheets="@DarkTheme.css" GridPane.columnIndex="1" />
+                  <TextField fx:id="txtNumero" styleClass="text-field" GridPane.columnIndex="1" />
                   <TextField fx:id="txtNom" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="txtPrenom" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="txtAdresse" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="3" />
