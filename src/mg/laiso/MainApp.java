@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import mg.laiso.controller.EtudiantController;
 import mg.laiso.controller.EtudiantFormDialogController;
+import mg.laiso.controller.ParametresController;
 import mg.laiso.controller.RootController;
 import mg.laiso.model.Etudiant;
 import mg.laiso.model.EtudiantListWrapper;
@@ -33,6 +34,9 @@ public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
+
+    private String adresseIP;
+    private int port;
 
     private ObservableList<Etudiant> etudiants = FXCollections.observableArrayList();
 
@@ -122,6 +126,33 @@ public class MainApp extends Application {
         }
     }
 
+    public void showParametres(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/Parametres.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            ParametresController controller = (ParametresController) loader.getController();
+            controller.setMainApp(this);
+
+            Stage parametreStage = new Stage();
+            parametreStage.setTitle("Paramètres");
+            parametreStage.initModality(Modality.APPLICATION_MODAL);
+            parametreStage.initOwner(primaryStage);
+
+            controller.setParametreStage(parametreStage);
+
+            Scene scene = new Scene(page);
+            parametreStage.setScene(scene);
+
+            parametreStage.setResizable(false);
+
+            parametreStage.showAndWait();
+        }catch (IOException e){
+            System.err.println("Cannot load Parametres FXML resource");
+        }
+    }
+
     public File getEtudiantFilePath() {
         Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
         String filePath = prefs.get("filePath", null);
@@ -196,6 +227,14 @@ public class MainApp extends Application {
             }
             primaryStage.close();
         }
+    }
+
+    public void setAdresseIP(String adresseIP) {
+        this.adresseIP = adresseIP;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
     }
 
     public Stage getPrimaryStage() {

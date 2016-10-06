@@ -84,4 +84,15 @@ public class RootController {
 
         alert.showAndWait();
     }
+
+    @FXML
+    private void parametres(){
+        System.out.println("Paramètres");
+        mainApp.showParametres();
+    }
+
+    @FXML
+    private void synchroniser(){
+        System.out.println("synchronisation");
+    }
 }

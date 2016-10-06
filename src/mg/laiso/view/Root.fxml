@@ -18,6 +18,12 @@
               <MenuItem mnemonicParsing="false" onAction="#quitter" text="Fermer" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Synchronisation">
+              <items>
+                <MenuItem fx:id="menuParametres" mnemonicParsing="false" onAction="#parametres" text="Paramètres" />
+                  <MenuItem fx:id="menuSynchroniser" mnemonicParsing="false" onAction="#synchroniser" text="Synchroniser" />
+              </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Aide">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#aPropos" text="A propos" />
