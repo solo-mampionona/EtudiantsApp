@@ -25,6 +25,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.prefs.Preferences;
 
 /**
@@ -153,6 +154,15 @@ public class MainApp extends Application {
         }
     }
 
+    public boolean testerConnection(String host, int port){
+        try {
+            Socket socket = new Socket(host, port);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
     public File getEtudiantFilePath() {
         Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
         String filePath = prefs.get("filePath", null);
@@ -235,6 +245,14 @@ public class MainApp extends Application {
 
     public void setPort(int port) {
         this.port = port;
+    }
+
+    public String getAdresseIP() {
+        return adresseIP;
+    }
+
+    public int getPort() {
+        return port;
     }
 
     public Stage getPrimaryStage() {

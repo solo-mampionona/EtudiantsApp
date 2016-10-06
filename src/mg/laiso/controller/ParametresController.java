@@ -26,11 +26,18 @@ public class ParametresController {
     private Button btnAnnuler;
 
     @FXML
+    private Button btnTesterConnexion;
+
+    @FXML
     private Label labelErreur;
 
     private Stage parametreStage;
-    private boolean validerClicked = false;
     private MainApp mainApp;
+
+    @FXML
+    public void initialize(){
+
+    }
 
     public void setParametreStage(Stage parametreStage) {
         this.parametreStage = parametreStage;
@@ -41,27 +48,45 @@ public class ParametresController {
     }
 
     @FXML
-    private void valider(){
-        if(isValid()){
-            mainApp.setAdresseIP(fieldAdresse.getText().trim());
-            mainApp.setPort(Integer.parseInt(fieldPort.getText().trim()));
-            parametreStage.close();
+    private boolean testerConnexion() {
+        labelErreur.setText("");
+        if (isValid()) {
+            if (mainApp.testerConnection(fieldAdresse.getText().trim(), Integer.parseInt(fieldPort.getText().trim()))) {
+                labelErreur.setText("Connexion réussie"); return true;
+            }
+            else {
+                labelErreur.setText("Impossible d'établir la connexion");
+                labelErreur.setTextFill(Paint.valueOf("RED"));
+            }
+        }
+        return false;
+    }
+
+    @FXML
+    private void valider() {
+        labelErreur.setText("");
+        if (isValid()) {
+            if(testerConnexion()) {
+                mainApp.setAdresseIP(fieldAdresse.getText().trim());
+                mainApp.setPort(Integer.parseInt(fieldPort.getText().trim()));
+                parametreStage.close();
+            }
         }
     }
 
     @FXML
-    private void annuler(){
+    private void annuler() {
         parametreStage.close();
     }
 
-    private boolean isValid(){
+    private boolean isValid() {
         String message = "";
 
-        if(fieldAdresse.getText() == null || fieldAdresse.getText().length() == 0){
+        if (fieldAdresse.getText() == null || fieldAdresse.getText().length() == 0) {
             message += "Adresse du serveur non valide";
         }
 
-        if(fieldPort.getText() == null || fieldPort.getText().length() == 0){
+        if (fieldPort.getText() == null || fieldPort.getText().length() == 0) {
             message += (message.length() > 0 ? " - " : "") + "Numero de port non valide";
         }
 
