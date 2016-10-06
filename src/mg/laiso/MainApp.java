@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
@@ -16,6 +17,7 @@ import mg.laiso.controller.EtudiantFormDialogController;
 import mg.laiso.controller.RootController;
 import mg.laiso.model.Etudiant;
 import mg.laiso.model.EtudiantListWrapper;
+import mg.laiso.view.ConfirmBox;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -48,12 +50,16 @@ public class MainApp extends Application {
         this.primaryStage = stage;
         this.primaryStage.setTitle("Gestion d'étudiant");
 
+        this.primaryStage.setOnCloseRequest(e -> {
+            closeProgram(); e.consume();
+        });
+
         initRootLayout();
 
         showEtudiant();
     }
 
-    public void initRootLayout(){
+    public void initRootLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/Root.fxml"));
@@ -66,17 +72,17 @@ public class MainApp extends Application {
             controller.setMainApp(this);
 
             primaryStage.show();
-        }catch (IOException e){
+        } catch (IOException e) {
             System.err.println("Cannot load Root FXML resources");
         }
 
         File file = getEtudiantFilePath();
-        if(file != null)
+        if (file != null)
             loadDataFromFile(file);
     }
 
-    public void showEtudiant(){
-        try{
+    public void showEtudiant() {
+        try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/Etudiant.fxml"));
             AnchorPane etudiantOverview = (AnchorPane) loader.load();
@@ -85,13 +91,13 @@ public class MainApp extends Application {
 
             EtudiantController controller = loader.getController();
             controller.setMainApp(this);
-        }catch (IOException e){
+        } catch (IOException e) {
             System.err.println("Cannot load Etudiant FXML resources");
         }
     }
 
-    public boolean showEtudiantEditDialog(Etudiant etudiant){
-        try{
+    public boolean showEtudiantEditDialog(Etudiant etudiant) {
+        try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/EtudiantFormDialog.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
@@ -110,35 +116,35 @@ public class MainApp extends Application {
 
             dialogStage.showAndWait();
             return controller.isValiderClicked();
-        }catch (IOException e){
+        } catch (IOException e) {
             System.err.println("Cannot load EtudiantFormDialog FXML resource");
             return false;
         }
     }
 
-    public File getEtudiantFilePath(){
+    public File getEtudiantFilePath() {
         Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-        String filePath = prefs.get("fileFath", null);
-        if(filePath != null)
+        String filePath = prefs.get("filePath", null);
+        if (filePath != null)
             return new File(filePath);
         return null;
     }
 
-    public void setEtudiantFilePath(File file){
+    public void setEtudiantFilePath(File file) {
         Preferences preferences = Preferences.userNodeForPackage(MainApp.class);
-        if(file != null) {
+        if (file != null) {
             preferences.put("filePath", file.getPath());
 
             primaryStage.setTitle("Gestion d'étudiant - " + file.getName());
-        }else{
+        } else {
             preferences.remove("filePath");
 
             primaryStage.setTitle("Gestion d'étudiants");
         }
     }
 
-    public void loadDataFromFile(File file){
-        try{
+    public void loadDataFromFile(File file) {
+        try {
             JAXBContext context = JAXBContext.newInstance(EtudiantListWrapper.class);
             Unmarshaller um = context.createUnmarshaller();
 
@@ -148,7 +154,7 @@ public class MainApp extends Application {
 
             // Registre
             setEtudiantFilePath(file);
-        }catch (Exception e){
+        } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
             alert.setHeaderText("Erreur lors du chargement des données");
@@ -158,8 +164,8 @@ public class MainApp extends Application {
         }
     }
 
-    public void saveDataToFile(File file){
-        try{
+    public void saveDataToFile(File file) {
+        try {
             JAXBContext context = JAXBContext.newInstance(EtudiantListWrapper.class);
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -170,7 +176,7 @@ public class MainApp extends Application {
             m.marshal(wrapper, file);
 
             setEtudiantFilePath(file);
-        }catch (Exception e){
+        } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
             alert.setHeaderText("Erreur lors de l'éctirure des données");
@@ -180,11 +186,23 @@ public class MainApp extends Application {
         }
     }
 
-    public Stage getPrimaryStage(){
+    private void closeProgram() {
+        boolean answer = ConfirmBox.display("Confirmer", "Voulez-vous vraiment fermer l'application?");
+        if (answer) {
+            File file = getEtudiantFilePath();
+            if (file != null) {
+                System.out.println("Saving file");
+                saveDataToFile(file);
+            }
+            primaryStage.close();
+        }
+    }
+
+    public Stage getPrimaryStage() {
         return this.primaryStage;
     }
 
-    public ObservableList<Etudiant> getEtudiants(){
+    public ObservableList<Etudiant> getEtudiants() {
         return this.etudiants;
     }
 
