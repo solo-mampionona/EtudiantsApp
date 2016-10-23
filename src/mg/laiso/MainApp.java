@@ -1,10 +1,13 @@
 package mg.laiso;
 
+import com.github.plushaze.traynotification.animations.Animations;
+import com.github.plushaze.traynotification.notification.Notification;
+import com.github.plushaze.traynotification.notification.Notifications;
+import com.github.plushaze.traynotification.notification.TrayNotification;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
@@ -12,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javafx.util.Duration;
 import mg.laiso.controller.EtudiantController;
 import mg.laiso.controller.EtudiantFormDialogController;
 import mg.laiso.controller.ParametresController;
@@ -76,6 +80,7 @@ public class MainApp extends Application {
             RootController controller = loader.getController();
             controller.setMainApp(this);
 
+            primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException e) {
             System.err.println("Cannot load Root FXML resources");
@@ -193,6 +198,15 @@ public class MainApp extends Application {
             etudiants.clear();
             etudiants.addAll(wrapper.getEtudiants());
 
+            Notification notification = Notifications.INFORMATION;
+            TrayNotification trayNotification = new TrayNotification();
+            trayNotification.setTitle("Gestion d'étudiants App");
+            trayNotification.setMessage("Chargement des données depuis \"" + file.getName() +"\"");
+            trayNotification.setNotification(notification);
+            trayNotification.setAnimation(Animations.FADE);
+            trayNotification.showAndDismiss(Duration.seconds(3));
+            trayNotification.showAndWait();
+
             // Registre
             setEtudiantFilePath(file);
         } catch (Exception e) {
@@ -215,6 +229,15 @@ public class MainApp extends Application {
             wrapper.setEtudiants(etudiants);
 
             m.marshal(wrapper, file);
+
+            Notification notification = Notifications.SUCCESS;
+            TrayNotification trayNotification = new TrayNotification();
+            trayNotification.setTitle("Gestion d'étudiants App");
+            trayNotification.setMessage("Enregistrement dans \"" + file.getName() +"\"");
+            trayNotification.setNotification(notification);
+            trayNotification.setAnimation(Animations.FADE);
+            trayNotification.showAndDismiss(Duration.seconds(3));
+            trayNotification.showAndWait();
 
             setEtudiantFilePath(file);
         } catch (Exception e) {

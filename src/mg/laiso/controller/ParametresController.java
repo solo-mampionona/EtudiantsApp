@@ -52,7 +52,7 @@ public class ParametresController {
         labelErreur.setText("");
         if (isValid()) {
             if (mainApp.testerConnection(fieldAdresse.getText().trim(), Integer.parseInt(fieldPort.getText().trim()))) {
-                labelErreur.setText("Connexion réussie"); return true;
+                labelErreur.setText("Connexion réussie"); labelErreur.setTextFill(Paint.valueOf("GREEN"));return true;
             }
             else {
                 labelErreur.setText("Impossible d'établir la connexion");

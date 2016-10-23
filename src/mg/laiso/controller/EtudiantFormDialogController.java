@@ -38,15 +38,15 @@ public class EtudiantFormDialogController {
     private boolean validerClicked = false;
 
     @FXML
-    private void initialize(){
+    private void initialize() {
 
     }
 
-    public void setDialogStage(Stage stage){
+    public void setDialogStage(Stage stage) {
         this.dialogStage = stage;
     }
 
-    public void setEtudiant(Etudiant etudiant){
+    public void setEtudiant(Etudiant etudiant) {
         this.etudiant = etudiant;
 
         this.txtNumero.setText(etudiant.getNumero());
@@ -56,13 +56,13 @@ public class EtudiantFormDialogController {
         this.txtBourse.setText(String.valueOf(etudiant.getBourse()));
     }
 
-    public boolean isValiderClicked(){
+    public boolean isValiderClicked() {
         return validerClicked;
     }
 
     @FXML
-    private void valider(){
-        if(isInputValid()){
+    private void valider() {
+        if (isInputValid()) {
             etudiant.setNumero(txtNumero.getText());
             etudiant.setNom(txtNom.getText());
             etudiant.setPrenom(txtPrenom.getText());
@@ -75,38 +75,41 @@ public class EtudiantFormDialogController {
     }
 
     @FXML
-    private void annuler(){
+    private void annuler() {
         dialogStage.close();
     }
 
-    private boolean isInputValid(){
+    private boolean isInputValid() {
         String message = "";
 
-        if(txtNumero.getText() == null || txtNumero.getText().length() == 0)
+        if (txtNumero.getText() == null || txtNumero.getText().length() == 0)
             message += "Le champ numéro ne doit pas être vide.\n";
+        else if (false)
+            message += "Le champ numero ne respecte pas le format utilisé";
 
-        if(txtNom.getText() == null || txtNom.getText().length() == 0)
+
+        if (txtNom.getText() == null || txtNom.getText().length() == 0)
             message += "Le champ nom ne doit pas être vide.\n";
 
-        if(txtPrenom.getText() == null || txtPrenom.getText().length() == 0)
+        if (txtPrenom.getText() == null || txtPrenom.getText().length() == 0)
             message += "Le champ prénom ne doit pas être vide.\n";
 
-        if(txtAdresse.getText() == null || txtAdresse.getText().length() == 0)
+        if (txtAdresse.getText() == null || txtAdresse.getText().length() == 0)
             message += "Le champ adresse ne doit pas être vide.\n";
 
-        if(txtBourse.getText() == null || txtBourse.getText().length() == 0) {
+        if (txtBourse.getText() == null || txtBourse.getText().length() == 0) {
             message += "Le champ prénom ne doit pas être vide.\n";
-        }else{
-            try{
+        } else {
+            try {
                 Double.parseDouble(txtBourse.getText());
-            }catch(NumberFormatException e){
-                message += "Bourse non valide.\n";
+            } catch (NumberFormatException e) {
+                message += "Montant de la bourse non valide.\n";
             }
         }
 
-        if(message.length() == 0)
+        if (message.length() == 0)
             return true;
-        else{
+        else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
             alert.setTitle("Champs non valide");

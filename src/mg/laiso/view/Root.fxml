@@ -5,31 +5,37 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mg.laiso.controller.RootController">
-   <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="Fichier">
-            <items>
-                  <MenuItem mnemonicParsing="false" onAction="#nouveau" text="Nouveau" />
-                  <MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
-                  <MenuItem mnemonicParsing="false" onAction="#enregistrer" text="Enregistrer" />
-                  <MenuItem mnemonicParsing="false" onAction="#enregistrerSous" text="Enregistrer sous ..." />
-              <MenuItem mnemonicParsing="false" onAction="#quitter" text="Fermer" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="Synchronisation">
-              <items>
-                <MenuItem fx:id="menuParametres" mnemonicParsing="false" onAction="#parametres" text="Paramètres" />
-                  <MenuItem fx:id="menuSynchroniser" mnemonicParsing="false" onAction="#synchroniser" text="Synchroniser" />
-              </items>
-            </Menu>
-          <Menu mnemonicParsing="false" text="Aide">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#aPropos" text="A propos" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+            prefWidth="800.0" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.60"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="mg.laiso.controller.RootController">
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="Fichier">
+                    <items>
+                        <MenuItem mnemonicParsing="false" fx:id="nouveau" onAction="#nouveau" text="Nouveau"/>
+                        <MenuItem mnemonicParsing="false" fx:id="ouvrir" onAction="#ouvrir" text="Ouvrir"/>
+                        <MenuItem mnemonicParsing="false" fx:id="enregistrer" onAction="#enregistrer"
+                                  text="Enregistrer"/>
+                        <MenuItem mnemonicParsing="false" fx:id="enregistrerSous" onAction="#enregistrerSous"
+                                  text="Enregistrer sous ..."/>
+                        <MenuItem mnemonicParsing="false" fx:id="quitter" onAction="#quitter" text="Fermer"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Synchronisation">
+                    <items>
+                        <MenuItem fx:id="menuParametres" mnemonicParsing="false" onAction="#parametres"
+                                  text="Paramètres"/>
+                        <MenuItem fx:id="menuSynchroniser" mnemonicParsing="false" onAction="#synchroniser"
+                                  text="Synchroniser"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Aide">
+                    <items>
+                        <MenuItem mnemonicParsing="false" fx:id="apropos" onAction="#aPropos" text="A propos"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
 </BorderPane>

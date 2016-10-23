@@ -2,6 +2,10 @@ package mg.laiso.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.MenuItem;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.FileChooser;
 import mg.laiso.MainApp;
 
@@ -16,6 +20,35 @@ public class RootController {
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+    }
+
+    @FXML
+    private MenuItem nouveau;
+    @FXML
+    private MenuItem ouvrir;
+    @FXML
+    private MenuItem enregistrer;
+    @FXML
+    private MenuItem enregistrerSous;
+    @FXML
+    private MenuItem quitter;
+    @FXML
+    private MenuItem menuParametres;
+    @FXML
+    private MenuItem menuSynchroniser;
+    @FXML
+    private MenuItem apropos;
+
+    public void initialize(){
+        nouveau.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
+        ouvrir.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
+        enregistrer.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCodeCombination.CONTROL_DOWN));
+        enregistrerSous.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCodeCombination.SHIFT_DOWN, KeyCodeCombination.CONTROL_DOWN));
+        quitter.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCodeCombination.CONTROL_DOWN));
+        menuParametres.setAccelerator(new KeyCodeCombination(KeyCode.P, KeyCodeCombination.CONTROL_DOWN));
+        menuSynchroniser.setAccelerator(new KeyCodeCombination(KeyCode.Y, KeyCodeCombination.CONTROL_DOWN));
+        apropos.setAccelerator(new KeyCodeCombination(KeyCode.F1));
+
     }
 
     @FXML
@@ -72,7 +105,7 @@ public class RootController {
 
     @FXML
     private void quitter(){
-        System.exit(0);
+        mainApp.getPrimaryStage().close();
     }
 
     @FXML
